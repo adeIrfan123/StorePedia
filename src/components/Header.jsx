@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 
 function Header() {
   const [scroll, setScroll] = useState(false);
   let navigate = useNavigate();
 
   const login = () => {
-    localStorage.setItem("access_token", "123qwerty");
-    navigate("/");
+    navigate("LoginPage");
   };
   const logOut = () => {
-    localStorage.removeItem("access_token");
+    localStorage.removeItem("token");
     navigate("/");
   };
 
@@ -29,36 +28,33 @@ function Header() {
   }, []);
 
   let scrollActive = scroll
-    ? "py-2 bg-slate-300 opacity-85 shadow-sm shadow-black"
+    ? "py-2 bg-[#F0BB78] opacity-85 shadow-sm shadow-black"
     : "py-4";
 
   return (
     <>
       <nav
-        className={`w-full px-16 mx-auto fixed flex justify-between items-center transition-all ${scrollActive}`}
+        className={`w-full bg-[#F0BB78] font-poppins px-6 mx-auto fixed flex justify-between items-center transition-all ${scrollActive} lg:px-16`}
       >
         <Link to="/" className="font-bold text-3xl">
           StorePedia
         </Link>
-        {localStorage.getItem("access_token") && (
-          <button onClick={() => logOut()}>LogOut</button>
-        )}
-        {!localStorage.getItem("access_token") && (
-          <button onClick={() => login()}>Login</button>
-        )}
-        <div className="">
+
+        <div className="flex">
           <button
             onClick={cart}
-            className="bg-green-400 py-1 px-4 mx-3 font-bold rounded-md shadow"
+            className="bg-[#C9E6F0] py-1 px-4 mx-3 font-bold rounded-md shadow"
           >
             Cart
           </button>
-          {/* <button
-            onClick={login}
-            className="bg-yellow-200 px-5 py-1 font-bold text-xl rounded-md shadow"
-          >
-            login
-          </button> */}
+          <div className="bg-lime-200 p-2 text-center font-semibold rounded-md">
+            {localStorage.getItem("token") && (
+              <button onClick={() => logOut()}>LogOut</button>
+            )}
+            {!localStorage.getItem("token") && (
+              <button onClick={() => login()}>Login</button>
+            )}
+          </div>
         </div>
       </nav>
       <Outlet />

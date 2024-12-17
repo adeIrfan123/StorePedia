@@ -43,6 +43,12 @@ const productSlice = createSlice({
       }
     },
 
+    removeFromCart: (state, action) => {
+      state.cart = state.cart.filter(
+        (cartItem) => cartItem.id !== action.payload
+      );
+    },
+
     //
     checkOut: (state, action) => {
       state.products = state.products.map((product) => {
@@ -75,5 +81,6 @@ export const fetchProducts = createAsyncThunk(
     return response.data;
   }
 );
-export const { addToCart, checkOut, updateCartQuantity } = productSlice.actions;
+export const { addToCart, checkOut, updateCartQuantity, removeFromCart } =
+  productSlice.actions;
 export default productSlice.reducer;

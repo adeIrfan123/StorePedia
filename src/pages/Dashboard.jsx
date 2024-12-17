@@ -5,7 +5,6 @@ import { fetchProducts } from "../redux/slice";
 function Dashboard() {
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("masuk");
     dispatch(fetchProducts());
   }, []);
   return (

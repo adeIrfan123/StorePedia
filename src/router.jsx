@@ -1,9 +1,10 @@
-import { createBrowserRouter, redirect } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import ListProduct from "./pages/ListProduct";
 import LoginPage from "./pages/LoginPage";
 import ProductDetail from "./pages/ProductDetail";
 import Dashboard from "./pages/Dashboard";
 import CartPage from "./pages/CartPage";
+import ProtectedRoutes from "./pages/ProtectedRoutes";
 
 const router = createBrowserRouter([
   {
@@ -20,13 +21,11 @@ const router = createBrowserRouter([
       },
       {
         path: "Cart",
-        element: <CartPage />,
-        loader: () => {
-          if (!localStorage.access_token) {
-            return redirect("/LoginPage");
-          }
-          return null;
-        },
+        element: (
+          <ProtectedRoutes>
+            <CartPage />
+          </ProtectedRoutes>
+        ),
       },
     ],
   },
