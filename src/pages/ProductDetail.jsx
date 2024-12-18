@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../redux/slice";
+import { addToCart, fetchProducts } from "../redux/slice";
 
 function ProductDetail() {
   const { id } = useParams();
@@ -11,6 +11,12 @@ function ProductDetail() {
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
   const [warning, setWarning] = useState("");
+
+  useEffect(() => {
+    if (product.length === 0) {
+      dispatch(fetchProducts());
+    }
+  }, [dispatch, product.length]);
 
   const handleQuantityChange = (e) => {
     const newQuantity = Number(e.target.value);
