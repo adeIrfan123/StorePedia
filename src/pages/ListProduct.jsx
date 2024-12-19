@@ -17,15 +17,15 @@ function ListProduct() {
   };
   return (
     <div className=" py-20 font-poppins">
-      <div className="container flex justify-center">
+      <div className="container flex justify-center mx-auto">
         <div className="">
           <h1 className="mt-2 mb-4 font-bold text-3xl lg:mx-5">All Product</h1>
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
             {products.map((product) => {
               return (
                 <div
                   key={product.id}
-                  className="cursor-pointer w-[350px] shadow-md shadow-slate-400 rounded-lg lg:w-72"
+                  className="cursor-pointer w-[330px] shadow-md shadow-slate-400 rounded-lg lg:w-72"
                 >
                   <div onClick={() => productDetail(product.id)}>
                     <img

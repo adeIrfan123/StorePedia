@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { checkOut, updateCartQuantity, removeFromCart } from "../redux/slice";
+import { useNavigate } from "react-router-dom";
 
 function CartPage() {
   const dispatch = useDispatch();
   const carts = useSelector((state) => state.products.cart);
   const [warning, setWarning] = useState("");
+  const navigate = useNavigate();
+  const productDetail = (id) => {
+    navigate(`/ProductDetail/${id}`);
+  };
 
   const calculateTotalPrice = () => {
     return carts.reduce((total, cart) => total + cart.price * cart.quantity, 0);
@@ -27,19 +32,24 @@ function CartPage() {
     dispatch(removeFromCart(id));
   };
 
-  const isCheckoutDisabled = carts.some((cart) => cart.stock === 0);
+  const isCheckoutDisabled = carts.find((cart) => cart.stock === 0);
 
   return (
     <>
-      <div className="container pt-20">
-        <ul className="lg:mx-40 my-10">
+      <div className="container mx-auto pt-20">
+        <ul className="md:mx-auto lg:mx-40 my-10">
           {carts.length > 0 ? (
             carts.map((cart) => (
-              <li key={cart.id} className="px-6 py-5 flex gap-4">
-                <img src={cart.image} alt="" className="h-40" />
-                <div>
-                  <h3 className="font-bold">{cart.title}</h3>
-                  <p>Stock: {cart.stock}</p>
+              <li key={cart.id} className="px-6 py-5 flex gap-4 justify-center">
+                <img src={cart.image} alt="" className="h-40 w-28" />
+                <div className="w-96">
+                  <h3
+                    onClick={() => productDetail(cart.id)}
+                    className="font-bold cursor-pointer"
+                  >
+                    {cart.title}
+                  </h3>
+                  <p className="text-lg">Stock: {cart.stock}</p>
                   <div className="flex gap-3 mt-4 mb-2">
                     <input
                       type="number"
@@ -82,7 +92,7 @@ function CartPage() {
             </div>
 
             <button
-              className={`bg-green-400 p-2 font-semibold shadow-md shadow-slate-400 rounded-md 
+              className={`bg-green-400 p-2 mr-8 font-semibold shadow-md shadow-slate-400 rounded-md 
               ${isCheckoutDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
               disabled={isCheckoutDisabled}
               onClick={() => {

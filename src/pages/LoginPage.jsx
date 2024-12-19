@@ -38,15 +38,13 @@ function LoginPage() {
         setError("Email atau password salah.");
       }
     } catch (err) {
-      // Tangani error login
       setError("Terjadi kesalahan saat login. Coba lagi nanti.");
-      console.error("Error Login:", err);
     }
   };
 
   return (
     <div className="w-full font-poppins h-screen flex items-center justify-center">
-      <div className="bg-orange-400 w-[360px] rounded-lg shadow-md shadow-slate-500">
+      <div className="bg-orange-400 w-[330px] rounded-lg shadow-md shadow-slate-500">
         <h1 className="pt-5 text-white font-bold text-3xl text-center">
           Login Dulu Brokk
         </h1>
@@ -62,7 +60,7 @@ function LoginPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Masukkan Email..."
-            className="py-1 px-3 rounded-full w-52 my-3 border border-gray-300"
+            className="py-1 px-3 rounded-full w-52 mb-3 border border-gray-300"
           />
           <input
             type="password"

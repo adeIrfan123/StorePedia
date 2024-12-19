@@ -34,7 +34,7 @@ function Header() {
   return (
     <>
       <nav
-        className={`w-full bg-[#F0BB78] font-poppins px-6 mx-auto fixed flex justify-between items-center transition-all ${scrollActive} lg:px-16`}
+        className={`w-full bg-[#F0BB78] font-poppins px-3 mx-auto fixed flex justify-between items-center transition-all ${scrollActive} lg:px-16`}
       >
         <Link to="/" className="font-bold text-3xl">
           StorePedia

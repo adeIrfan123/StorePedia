@@ -34,7 +34,6 @@ const productSlice = createSlice({
       }
     },
 
-    //
     updateCartQuantity: (state, action) => {
       const { id, quantity } = action.payload;
       const item = state.cart.find((cart) => cart.id === id);
@@ -49,7 +48,6 @@ const productSlice = createSlice({
       );
     },
 
-    //
     checkOut: (state, action) => {
       state.products = state.products.map((product) => {
         const existingCart = state.cart.find((cart) => cart.id === product.id);
