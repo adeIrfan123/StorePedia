@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { checkOut, updateCartQuantity, removeFromCart } from "../redux/slice";
 import { useNavigate } from "react-router-dom";
@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 function CartPage() {
   const dispatch = useDispatch();
   const carts = useSelector((state) => state.products.cart);
-  const [warning, setWarning] = useState("");
   const navigate = useNavigate();
   const productDetail = (id) => {
     navigate(`/ProductDetail/${id}`);
@@ -18,12 +17,11 @@ function CartPage() {
 
   const quantityChange = (id, newQuantity, stock) => {
     if (newQuantity > stock) {
-      setWarning(`Quantity Tidak Boleh Lebih Dari Stock (${stock})`);
+      alert(`Quantity Tidak Boleh Lebih Dari Stock (${stock})`);
     } else if (newQuantity < 1) {
-      setWarning("Quantity Tidak Boleh Kurang Dari 1");
+      alert("Quantity Tidak Boleh Kurang Dari 1");
       dispatch(updateCartQuantity({ id, quantity: 1 }));
     } else {
-      setWarning("");
       dispatch(updateCartQuantity({ id, quantity: newQuantity }));
     }
   };
@@ -75,7 +73,6 @@ function CartPage() {
                       Remove
                     </button>
                   </div>
-                  <p className="text-red-500 font-bold">{warning}</p>
                 </div>
               </li>
             ))
